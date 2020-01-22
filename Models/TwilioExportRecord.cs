@@ -1,5 +1,5 @@
 namespace twilio_downloader{
-    public class ExportRecord{
+    public class TwilioExportRecord{
         public string sid{get;set;}
         public string status {get;set;}
         public string datesent {get;set;}
