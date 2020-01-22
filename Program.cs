@@ -8,15 +8,7 @@ using Twilio.Rest.Api.V2010.Account;
 
 namespace twilio_downloader
 {
-    public class ExportRecord{
-        public string sid{get;set;}
-        public string status {get;set;}
-        public string datesent {get;set;}
-        public string datecreated {get;set;}
-        public string lastupdated{get;set;}
-        public string to{get;set;}
-        public string url;
-    }
+    
     class Program
     {
         private static string accountSid = ""; 
@@ -48,7 +40,7 @@ namespace twilio_downloader
                         DateSentAfter =DateTime.Parse($"{dateToRun} 00:00:00")
                 };
                 var messages = MessageResource.Read(opts);
-                var exportRecords = messages.Select(x => new ExportRecord{
+                var exportRecords = messages.Select(x => new TwilioExportRecord{
                     datecreated = x.DateCreated.ToString(), 
                     datesent = x.DateSent.ToString(), 
                     lastupdated = x.DateUpdated.ToString(), 
@@ -60,9 +52,7 @@ namespace twilio_downloader
                 csv.WriteRecords(exportRecords);
             }
         }
-        public static void WriteArgs(string[] args){
-                Console.WriteLine(String.Join(",",args));
-        }
+       
     }
 
 }
